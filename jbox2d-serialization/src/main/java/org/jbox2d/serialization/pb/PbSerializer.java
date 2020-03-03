@@ -139,7 +139,7 @@ public class PbSerializer implements JbSerializer {
         Body cbody = argWorld.getBodyList();
         int cnt = 0;
         HashMap<Body, Integer> bodies = new HashMap<>();
-        
+
         while (cbody != null) {
             builder.addBodies(serializeBody(cbody));
             bodies.put(cbody, cnt);
