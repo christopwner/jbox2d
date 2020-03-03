@@ -28,13 +28,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.box2d.proto.Box2D.PbBody;
-import org.box2d.proto.Box2D.PbFixture;
-import org.box2d.proto.Box2D.PbJoint;
-import org.box2d.proto.Box2D.PbJointType;
-import org.box2d.proto.Box2D.PbShape;
-import org.box2d.proto.Box2D.PbVec2;
-import org.box2d.proto.Box2D.PbWorld;
+import org.jbox2d.proto.Box2D.PbBody;
+import org.jbox2d.proto.Box2D.PbFixture;
+import org.jbox2d.proto.Box2D.PbJoint;
+import org.jbox2d.proto.Box2D.PbJointType;
+import org.jbox2d.proto.Box2D.PbShape;
+import org.jbox2d.proto.Box2D.PbVec2;
+import org.jbox2d.proto.Box2D.PbWorld;
 import org.jbox2d.collision.shapes.ChainShape;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.EdgeShape;
@@ -143,8 +143,8 @@ public class PbDeserializer implements JbDeserializer {
         cnt++;
       }
     }
-
-    if (listener != null && pbWorld.hasTag()) {
+    
+    if (listener != null) {
       listener.processWorld(world, pbWorld.getTag());
     }
     return world;
@@ -202,7 +202,7 @@ public class PbDeserializer implements JbDeserializer {
     body.m_linearVelocity.set(pbToVec(b.getLinearVelocity()));
     body.m_angularVelocity = b.getAngularVelocity();
 
-    if (listener != null && b.hasTag()) {
+    if (listener != null) {
       listener.processBody(body, b.getTag());
     }
     return body;
@@ -228,7 +228,7 @@ public class PbDeserializer implements JbDeserializer {
     fd.shape = deserializeShape(f.getShape());
 
     Fixture fixture = argBody.createFixture(fd);
-    if (listener != null && f.hasTag()) {
+    if (listener != null) {
       listener.processFixture(fixture, f.getTag());
     }
     return fixture;
@@ -295,7 +295,7 @@ public class PbDeserializer implements JbDeserializer {
     }
     shape.m_radius = s.getRadius();
 
-    if (listener != null && s.hasTag()) {
+    if (listener != null) {
       listener.processShape(shape, s.getTag());
     }
     return shape;
@@ -490,7 +490,7 @@ public class PbDeserializer implements JbDeserializer {
     jd.bodyB = argBodyMap.get(joint.getBodyB());
 
     Joint realJoint = argWorld.createJoint(jd);
-    if (listener != null && joint.hasTag()) {
+    if (listener != null) {
       listener.processJoint(realJoint, joint.getTag());
     }
 

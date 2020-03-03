@@ -4,3 +4,4 @@ target/
 *.log
 .project
 .classpath
+*.box2d
